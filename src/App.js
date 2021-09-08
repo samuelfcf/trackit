@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HabitsPage } from "./pages/HabitsPage/HabitsPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
 import { GlobalStyle } from "./styles/global";
@@ -11,6 +12,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={LoginPage} />
           <Route path="/cadastro" exact component={RegisterPage} />
+          <Route path="/habitos" exact component={HabitsPage} />
         </Switch>
       </BrowserRouter>
     </>

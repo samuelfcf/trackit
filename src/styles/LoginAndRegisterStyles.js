@@ -42,7 +42,7 @@ const FormContainer = styled.div`
 
   span {
     text-align: center;
-    font-size: 18px;
+    font-size: 15px;
     text-decoration: underline;
     color: #52B6FF;
     line-height: 17px;

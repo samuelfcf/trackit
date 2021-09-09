@@ -6,44 +6,44 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 68px;
-  gap: 33px;
+  padding-top: 4.25rem;
+  gap: 2.063rem;
 
   div {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.375rem;
   }
 
   span {
     text-align: center;
-    font-size: 15px;
+    font-size: 0.938rem;
     text-decoration: underline;
     color: #52B6FF;
-    line-height: 17px;
+    line-height: 1.063rem;
   }
 `
 const Button = styled.button`
-  height: 45px;
-  width: 303px;
+  height: 2.813rem;
+  width: 18.938rem;
   border: 0;
   border-radius: 5px;
   background-color: #52B6FF;
   color: #FFFFFF;
-  font-size: 21px;
+  font-size: 1.313rem;
   font-weight: 500;
   opacity: ${({ active }) => active ? 1 : 0.6};
 `
 
 const Input = styled.input`
   
-    height: 45px;
-    width: 303px;
+    height: 2.813rem;
+    width: 18.938rem;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
-    padding-left: 11px;
+    padding-left: 0.688rem;
     color: ${({ active }) => active ? "#333" : "#AFAFAF"};
     background-color: ${({ active }) => active ? "#FFFFFF" : "#F2F2F2"};
   
@@ -54,7 +54,7 @@ const Input = styled.input`
 
 const TrackItLogo = styled.img`
   content: url(${Logo});
-  height: 180px; 
+  height: 11.25rem;
 `
 
 export { FormContainer, TrackItLogo, Button, Input }

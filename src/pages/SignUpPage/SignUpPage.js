@@ -1,10 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Loading } from "../../components/Loading";
+import { SignUp } from "../../services/api";
 import { FormContainer, TrackItLogo, Button, Input } from "../../styles/LoginAndRegisterStyles";
 
-const RegisterPage = () => {
+const SignUpPage = () => {
 
   const history = useHistory();
 
@@ -21,14 +21,21 @@ const RegisterPage = () => {
   }
 
   const register = () => {
+    setIsActive(false);
+
     if (!inputFields.email.includes("@") || inputFields.password.length < 10 || !inputFields.name || !validateURL(inputFields.image)) {
+      setIsActive(true);
       return alert("Falha ao cadastrar, por favor preenchar os campos corretamente.");
     }
 
-    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", inputFields)
-      .then(
-        history.push("/")
-      )
+    const body = inputFields;
+
+    SignUp(body)
+      .then(() => {
+        setIsActive(true);
+        history.push("/");
+      }
+      );
   }
 
   return (
@@ -86,4 +93,4 @@ const RegisterPage = () => {
   );
 }
 
-export { RegisterPage }
+export { SignUpPage }

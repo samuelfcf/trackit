@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { Login } from "../../services/api";
 import { FormContainer, TrackItLogo, Button, Input } from "../../styles/LoginAndRegisterStyles";
+import { UserContext } from "../../contexts/UserContext";
 
 
 const LoginPage = () => {
+
+  const { setUser } = useContext(UserContext);
 
   const history = useHistory();
   const [isActive, setIsActive] = useState(true);
@@ -27,8 +30,9 @@ const LoginPage = () => {
 
     Login(body)
       .then((response) => {
+        setUser(response.data);
         setIsActive(true);
-        history.push("/habitos");
+        history.push("/hoje");
       })
       .catch(() => {
         setIsActive(true);

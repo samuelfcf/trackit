@@ -1,9 +1,10 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { PageContent } from "../../styles/PageContentStyle";
-import Delete from "../../assets/delete.png"
+import Delete from "../../assets/delete.png";
+import { UserContext } from "../../contexts/UserContext";
 import { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, WeekdayButton, ActionButtons, HabbitCard, Button } from "./HabitsPageStyles";
 
 const HabitsPage = () => {

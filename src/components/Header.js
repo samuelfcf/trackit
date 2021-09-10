@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import TrackIt from "../assets/TrackIt.svg"
-import profile from "../assets/profile.svg";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 const Header = () => {
+
+  const { user } = useContext(UserContext);
+
   return (
     <HeaderCard>
       <TrackItWordMark alt="trackit" />
-      <ProfileImage alt="" />
+      <ProfileImage src={user.image} alt="" />
     </HeaderCard>
   );
 }
@@ -33,7 +37,6 @@ const TrackItWordMark = styled.img`
 `
 
 const ProfileImage = styled.img`
-  content: url(${profile});
   width: 51px;
   height: 51px;
   border-radius: 50%;

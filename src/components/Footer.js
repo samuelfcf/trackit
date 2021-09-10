@@ -2,8 +2,14 @@ import styled from "styled-components"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { HabitsContext } from "../contexts/HabitsContext";
 
 const Footer = () => {
+
+  const { habitsStatus, setHabitsStatus } = useContext(HabitsContext);
+
+
   return (
     <FooterCard>
       <Link to="/habitos">
@@ -13,7 +19,7 @@ const Footer = () => {
       <div>
         <CircularProgressbar
           text={"Hoje"}
-          value={60}
+          value={habitsStatus}
           styles={buildStyles({
             pathColor: "#FFFFFF",
             textColor: "#FFFFFF",

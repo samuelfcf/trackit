@@ -2,18 +2,33 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { HabitsPage } from "./pages/HabitsPage/HabitsPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { TodayPage } from "./pages/TodayPage.js/TodayPage";
 import { GlobalStyle } from "./styles/global";
+import { UserContext } from "./contexts/UserContext";
+import { HabitsContext } from "./contexts/HabitsContext";
+import { useState } from "react";
+
+
 
 function App() {
+
+  const [user, setUser] = useState("");
+  const [habitsStatus, setHabitsStatus] = useState(50);
+
   return (
     <>
       <BrowserRouter>
-        <GlobalStyle />
-        <Switch>
-          <Route path="/" exact component={LoginPage} />
-          <Route path="/cadastro" exact component={SignUpPage} />
-          <Route path="/habitos" exact component={HabitsPage} />
-        </Switch>
+        <UserContext.Provider value={{ user, setUser }}>
+          <GlobalStyle />
+          <Switch>
+            <Route path="/" exact component={LoginPage} />
+            <HabitsContext.Provider value={{ habitsStatus, setHabitsStatus }}>
+              <Route path="/cadastro" exact component={SignUpPage} />
+              <Route path="/habitos" exact component={HabitsPage} />
+              <Route path="/hoje" exact component={TodayPage} />
+            </HabitsContext.Provider>
+          </Switch>
+        </UserContext.Provider>
       </BrowserRouter>
     </>
   );

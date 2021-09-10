@@ -34,8 +34,11 @@ const SignUpPage = () => {
       .then(() => {
         setIsActive(true);
         history.push("/");
-      }
-      );
+      })
+      .catch(() => {
+        setIsActive(true);
+        alert("Não foi possível efetuar o login, por favor tente novamente.");
+      });
   }
 
   return (
@@ -78,7 +81,7 @@ const SignUpPage = () => {
         <Button active={isActive} onClick={register}>
           {
             isActive
-              ? "Entrar"
+              ? "Cadastrar"
               : <Loading visible={isActive} />
           }
         </Button>

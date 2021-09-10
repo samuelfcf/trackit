@@ -7,4 +7,13 @@ const SignUp = async (body) => {
   return promise;
 }
 
-export { SignUp }
+const Login = async (request) => {
+  const body = {
+    email: request.email,
+    password: request.password
+  }
+  const promise = axios.post(`${BASE_URL}/auth/login`, body);
+  return promise;
+}
+
+export { SignUp, Login }

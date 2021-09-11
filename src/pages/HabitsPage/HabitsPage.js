@@ -8,7 +8,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, ActionButtons, HabbitCard, Button, WeekdayBtnStyled } from "./HabitsPageStyles";
 import { createHabit, getHabits, deleteHabit } from "../../services/api";
 import { WeekdayButton } from "./WeekdayButton";
-import { Loading } from "../../components/Loading";
+import { SmallLoading } from "../../components/SmallLoading";
 
 const HabitsPage = () => {
 
@@ -16,9 +16,8 @@ const HabitsPage = () => {
   const { user } = useContext(UserContext);
 
   const [habits, setHabits] = useState([]);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [isActive, setIsActive] = useState(true);
-  const [btnSelected, setBtnSelected] = useState(false);
   const [newHabit, setNewHabit] = useState({
     name: "",
     days: []
@@ -103,7 +102,7 @@ const HabitsPage = () => {
                 <WeekdayButton
                   day={weekday}
                   value={index}
-                  btnSelected={btnSelected}
+                  btnSelected={false}
                   name="days"
                   handleClick={handleClick}>{weekday}</WeekdayButton>))}
             </WeekdaysButtons>
@@ -113,7 +112,7 @@ const HabitsPage = () => {
               <Button bgColor={"#52B6FF"} color={"#FFFFFF"} onClick={addNewHabit}>{
                 isActive ?
                   "Salvar" :
-                  <Loading />
+                  <SmallLoading />
               }</Button>
             </ActionButtons>
           </NewHabitCard>

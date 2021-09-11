@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { UserContext } from "../../contexts/UserContext";
+import { PageContent } from "../../styles/PageContentStyle";
 
 const TodayPage = () => {
 
@@ -16,7 +17,7 @@ const TodayPage = () => {
   return (
     <>
       <Header />
-
+      <PageContent />
       <Footer />
     </>
   );

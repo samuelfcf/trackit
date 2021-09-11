@@ -6,8 +6,8 @@ import { TodayPage } from "./pages/TodayPage.js/TodayPage";
 import { GlobalStyle } from "./styles/global";
 import { UserContext } from "./contexts/UserContext";
 import { HabitsContext } from "./contexts/HabitsContext";
+import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 import { useState } from "react";
-
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
               <Route path="/cadastro" exact component={SignUpPage} />
               <Route path="/habitos" exact component={HabitsPage} />
               <Route path="/hoje" exact component={TodayPage} />
+              <Route path="/historico" exact component={HistoryPage} />
             </HabitsContext.Provider>
           </Switch>
         </UserContext.Provider>

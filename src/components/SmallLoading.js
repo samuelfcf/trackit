@@ -1,7 +1,7 @@
 import Loader from "react-loader-spinner"
 import styled from "styled-components";
 
-const Loading = () => {
+const SmallLoading = () => {
   return (
     <LoaderContainer>
       <Loader type="ThreeDots" color="#FFFFFF" height={70} width={70} />
@@ -10,12 +10,12 @@ const Loading = () => {
 }
 
 const LoaderContainer = styled.div`
-  left:10%;
-  top:50%;
+  left:25%;
+  top:70%;
   position: relative;
   margin-left:-40px;
   margin-top:-40px;
 `
 
 
-export { Loading }
+export { SmallLoading }

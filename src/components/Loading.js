@@ -10,7 +10,7 @@ const Loading = () => {
 }
 
 const LoaderCotainer = styled.div`
-  left:50%;
+  left:10%;
   top:50%;
   position: relative;
   margin-left:-40px;

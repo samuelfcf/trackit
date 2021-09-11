@@ -9,7 +9,7 @@ const FormContainer = styled.div`
   padding-top: 4.25rem;
   gap: 2.063rem;
 
-  div {
+  form {
     display: flex;
     flex-direction: column;
     gap: 0.375rem;

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { Login } from "../../services/api";
+import { LogIn } from "../../services/api";
 import { FormContainer, TrackItLogo, Button, Input } from "../../styles/LoginAndRegisterStyles";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -18,17 +18,12 @@ const LoginPage = () => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value })
   }
 
-  const enter = () => {
+  const enter = (event) => {
+    event.preventDefault();
     setIsActive(false);
-
-    if (!inputFields.email || !inputFields.password) {
-      setIsActive(true);
-      return alert("Por favor, preencha os campos.");
-    }
-
     const body = inputFields;
 
-    Login(body)
+    LogIn(body)
       .then((response) => {
         setUser(response.data);
         setIsActive(true);
@@ -44,27 +39,27 @@ const LoginPage = () => {
     <FormContainer>
       <TrackItLogo alt="logo" />
 
-      <div>
-        <Input
+      <form onSubmit={enter}>
+        <Input required
           active={isActive}
           type="text"
           placeholder="email"
           onChange={handleChange}
           name="email" />
-        <Input
+        <Input required
           active={isActive}
           type="password"
           placeholder="senha"
           onChange={handleChange}
           name="password" />
-        <Button active={isActive} onClick={enter}>
+        <Button active={isActive}>
           {
             isActive
               ? "Entrar"
               : <Loading visible={isActive} />
           }
         </Button>
-      </div>
+      </form>
 
       <Link to="/cadastro">
         <span>

@@ -15,19 +15,9 @@ const SignUpPage = () => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
   }
 
-  const validateURL = (url) => {
-    const rule = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
-    return rule.test(url)
-  }
-
-  const register = () => {
+  const register = (event) => {
+    event.preventDefault();
     setIsActive(false);
-
-    if (!inputFields.email.includes("@") || inputFields.password.length < 10 || !inputFields.name || !validateURL(inputFields.image)) {
-      setIsActive(true);
-      return alert("Falha ao cadastrar, por favor preenchar os campos corretamente.");
-    }
-
     const body = inputFields;
 
     SignUp(body)
@@ -45,8 +35,8 @@ const SignUpPage = () => {
     <FormContainer>
       <TrackItLogo />
 
-      <div>
-        <Input
+      <form onSubmit={register}>
+        <Input required
           active={isActive}
           autoComplete="off"
           type="email"
@@ -54,7 +44,7 @@ const SignUpPage = () => {
           value={inputFields.email}
           placeholder="email"
           onChange={handleChange} />
-        <Input
+        <Input required
           active={isActive}
           autoComplete="off"
           type="password"
@@ -62,7 +52,7 @@ const SignUpPage = () => {
           value={inputFields.password}
           placeholder="senha"
           onChange={handleChange} />
-        <Input
+        <Input required
           active={isActive}
           autoComplete="off"
           type="text"
@@ -70,22 +60,22 @@ const SignUpPage = () => {
           value={inputFields.name}
           placeholder="nome"
           onChange={handleChange} />
-        <Input
+        <Input required
           active={isActive}
           autoComplete="off"
-          type="text"
+          type="url"
           name="image"
           value={inputFields.image}
           placeholder="foto"
           onChange={handleChange} />
-        <Button active={isActive} onClick={register}>
+        <Button active={isActive} type="submit">
           {
             isActive
               ? "Cadastrar"
               : <Loading visible={isActive} />
           }
         </Button>
-      </div>
+      </form>
 
       <Link to="/">
         <span>

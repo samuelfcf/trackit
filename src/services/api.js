@@ -7,7 +7,7 @@ const SignUp = async (body) => {
   return promise;
 }
 
-const Login = async (request) => {
+const LogIn = async (request) => {
   const body = {
     email: request.email,
     password: request.password
@@ -16,4 +16,4 @@ const Login = async (request) => {
   return promise;
 }
 
-export { SignUp, Login }
+export { SignUp, LogIn }

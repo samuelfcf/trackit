@@ -26,7 +26,6 @@ margin-top: 1.875rem;
 font-size: 1.125rem;
 color: #666666;
 line-height: 1.375rem;
-display: ${({ isHidden }) => isHidden ? "none" : ""};
 `
 
 const NewHabitCard = styled.div`
@@ -36,7 +35,6 @@ border-radius: 5px;
 background-color: #FFFFFF;
 margin: 0 auto;
 margin-top: 1.375rem;
-display: ${({ isHidden }) => isHidden ? "none" : ""};
 
 input {
   margin: 1.125rem 1.125rem 0.5rem 1.125rem;
@@ -44,7 +42,8 @@ input {
   height: 2.813rem;
   border-radius: 5px;
   border: 1px solid #D4D4D4;
-  color: #333;
+  color: ${({ isActive }) => isActive ? "#333" : "#B3B3B3"};
+  background-color: ${({ isActive }) => isActive ? "white" : "#D4D4D4"};
   font-size: 1.25rem;
   font-weight: 500;
   padding-left: 0.688rem;
@@ -61,17 +60,6 @@ width: 21.25rem;
 height: 1.875rem;
 display: flex;
 gap: 4px;
-`
-
-const WeekdayButton = styled.button`
-height: 1.875rem;
-width: 1.875rem;
-color: #DBDBDB;
-font-size: 1.125rem;
-font-weight: 600;
-background-color: #FFFFFF;
-border: 1px solid #DBDBDB;
-border-radius: 5px;
 `
 
 const ActionButtons = styled.div`
@@ -93,6 +81,7 @@ flex-direction: column;
 gap: 10px;
 border-radius: 5px;
 position: relative;
+display: "";
 
 img {
   width: 0.938rem;
@@ -112,6 +101,17 @@ span {
 }
 `
 
+const WeekdayBtnStyled = styled.button`
+height: 1.875rem;
+width: 1.875rem;
+color: ${({ selected }) => selected ? "#FFFFFF" : "#DBDBDB"};
+font-size: 1.125rem;
+font-weight: 600;
+background-color: ${({ selected }) => selected ? "#CFCFCF" : "#FFFFFF"};
+border: 1px solid #DBDBDB;
+border-radius: 5px;
+`
+
 const Button = styled.button`
 height: 2.188rem;
 width: 5.25rem;
@@ -121,4 +121,4 @@ border-radius: 5px;
 background-color: ${({ bgColor }) => bgColor};
 color: ${({ color }) => color}
 `
-export { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, WeekdayButton, ActionButtons, HabbitCard, Button }
+export { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, ActionButtons, HabbitCard, Button, WeekdayBtnStyled }

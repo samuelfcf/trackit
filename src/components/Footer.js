@@ -16,17 +16,19 @@ const Footer = () => {
         <span>Hábitos</span>
       </Link>
 
-      <div>
-        <CircularProgressbar
-          text={"Hoje"}
-          value={habitsStatus}
-          styles={buildStyles({
-            pathColor: "#FFFFFF",
-            textColor: "#FFFFFF",
-            trailColor: "#52B6FF",
-            textSize: "20px"
-          })} />
-      </div>
+      <Link to="/hoje">
+        <div>
+          <CircularProgressbar
+            text={"Hoje"}
+            value={habitsStatus}
+            styles={buildStyles({
+              pathColor: "#FFFFFF",
+              textColor: "#FFFFFF",
+              trailColor: "#52B6FF",
+              textSize: "20px"
+            })} />
+        </div>
+      </Link>
 
       <Link to="/historico">
         <span>histórico</span>

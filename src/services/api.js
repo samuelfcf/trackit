@@ -13,7 +13,7 @@ const LogIn = async (request) => {
     password: request.password
   }
 
-  const promise = axios.post(`${BASE_URL}/auth/login`, body);
+  const promise = await axios.post(`${BASE_URL}/auth/login`, body);
   return promise;
 }
 
@@ -24,7 +24,7 @@ const getHabits = async (token) => {
     }
   }
 
-  const promise = axios.get(`${BASE_URL}/habits`, config);
+  const promise = await axios.get(`${BASE_URL}/habits`, config);
   return promise;
 }
 
@@ -40,7 +40,7 @@ const createHabit = async (request, token) => {
     }
   }
 
-  const promise = axios.post(`${BASE_URL}/habits`, body, config);
+  const promise = await axios.post(`${BASE_URL}/habits`, body, config);
   return promise;
 }
 
@@ -51,8 +51,41 @@ const deleteHabit = async (id, token) => {
     }
   }
 
-  const promise = axios.delete(`${BASE_URL}/habits/${id}`, config);
+  const promise = await axios.delete(`${BASE_URL}/habits/${id}`, config);
   return promise;
 }
 
-export { SignUp, LogIn, getHabits, createHabit, deleteHabit }
+const getTodayHabits = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const promise = await axios.get(`${BASE_URL}/habits/today`, config);
+  return promise
+}
+
+const checkHabitDone = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const promise = await axios.post(`${BASE_URL}/habits/${id}/check`, "", config);
+  return promise;
+}
+
+const uncheckHabit = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const promise = await axios.post(`${BASE_URL}/habits/${id}/uncheck`, "", config);
+  return promise;
+}
+
+export { SignUp, LogIn, getHabits, createHabit, deleteHabit, getTodayHabits, checkHabitDone, uncheckHabit }

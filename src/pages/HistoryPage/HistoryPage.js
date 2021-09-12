@@ -1,9 +1,20 @@
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header"
+import { UserContext } from "../../contexts/UserContext";
 import { PageContent } from "../../styles/PageContentStyle";
 
 const HistoryPage = () => {
+
+  const history = useHistory();
+  const { user } = useContext(UserContext);
+
+  if (!user.token) {
+    history.push("/");
+  }
+
   return (
     <>
       <Header />

@@ -13,7 +13,7 @@ import { useState } from "react";
 function App() {
 
   const [user, setUser] = useState("");
-  const [habitsStatus, setHabitsStatus] = useState(64);
+  const [habitsStatus, setHabitsStatus] = useState(0);
 
   return (
     <>

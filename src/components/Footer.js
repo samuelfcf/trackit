@@ -7,7 +7,7 @@ import { HabitsContext } from "../contexts/HabitsContext";
 
 const Footer = () => {
 
-  const { habitsStatus, setHabitsStatus } = useContext(HabitsContext);
+  const { habitsStatus } = useContext(HabitsContext);
 
 
   return (

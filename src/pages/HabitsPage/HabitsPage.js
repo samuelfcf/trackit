@@ -9,9 +9,11 @@ import { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButton
 import { createHabit, getHabits, deleteHabit } from "../../services/api";
 import { WeekdayButton } from "./WeekdayButton";
 import { SmallLoading } from "../../components/SmallLoading";
+import { useHistory } from "react-router-dom";
 
 const HabitsPage = () => {
 
+  const history = useHistory();
   const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
   const { user } = useContext(UserContext);
 
@@ -22,6 +24,10 @@ const HabitsPage = () => {
     name: "",
     days: []
   });
+
+  if (!user.token) {
+    history.push("/");
+  }
 
   useEffect(() => {
     getHabits(user.token)
@@ -43,7 +49,13 @@ const HabitsPage = () => {
 
   const addNewHabit = () => {
     setIsActive(false)
-    const body = newHabit;
+
+    if (newHabit.days.length === 0) {
+      setIsActive(true);
+      return alert("selecione no mínimo um dia da semana");
+    }
+
+    const body = newHabit
 
     createHabit(body, user.token)
       .then(() => {

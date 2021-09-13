@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const TodayContainer = styled.div`
   font-size: 18px;
   color: #BABABA;
@@ -62,7 +61,5 @@ const CheckButtonStyled = styled.button`
   border: 0;
   background-color: ${({ done }) => done ? "#8FC549" : "#EBEBEB"}
 `
-
-
 
 export { TodayContainer, HabitInfoCard, HabitContainer, SequenceContainer, Sequence, Record, CheckButtonStyled }

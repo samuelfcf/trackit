@@ -1,8 +1,8 @@
 import { CheckButtonStyled } from "./TodayPageStyles";
-import Checkmark from "../../assets/checkmark.svg";
 import { useState } from "react";
+import Checkmark from "../../assets/checkmark.svg";
 
-const CheckButtonnn = ({ habit, checkHabit }) => {
+const CheckButton = ({ habit, checkHabit }) => {
 
   const [check, setCheck] = useState(habit.done)
 
@@ -13,9 +13,9 @@ const CheckButtonnn = ({ habit, checkHabit }) => {
 
   return (
     <CheckButtonStyled done={check} onClick={checkThisHabit}>
-      <img src={Checkmark} alt="" />
+      <img src={Checkmark} alt="checkmark-icon" />
     </CheckButtonStyled>
   )
 }
 
-export { CheckButtonnn };
+export { CheckButton };

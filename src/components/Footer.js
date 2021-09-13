@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { HabitsContext } from "../contexts/HabitsContext";
@@ -8,7 +8,6 @@ import { HabitsContext } from "../contexts/HabitsContext";
 const Footer = () => {
 
   const { habitsStatus } = useContext(HabitsContext);
-
 
   return (
     <FooterCard>
@@ -31,10 +30,10 @@ const Footer = () => {
       </Link>
 
       <Link to="/historico">
-        <span>histórico</span>
+        <span>Histórico</span>
       </Link>
     </FooterCard>
-  )
+  );
 }
 
 const FooterCard = styled.footer`

@@ -7,7 +7,6 @@ import { FormContainer, TrackItLogo, Button, Input } from "../../styles/LoginAnd
 const SignUpPage = () => {
 
   const history = useHistory();
-
   const [inputFields, setInputFields] = useState("");
   const [isActive, setIsActive] = useState(true);
 
@@ -15,7 +14,7 @@ const SignUpPage = () => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
   }
 
-  const register = (event) => {
+  const registerUser = (event) => {
     event.preventDefault();
     setIsActive(false);
     const body = inputFields;
@@ -27,7 +26,7 @@ const SignUpPage = () => {
       })
       .catch(() => {
         setIsActive(true);
-        alert("Não foi possível efetuar o login, por favor tente novamente.");
+        alert("Cadastro não concluido, por favor tente novamente.");
       });
   }
 
@@ -35,7 +34,7 @@ const SignUpPage = () => {
     <FormContainer>
       <TrackItLogo />
 
-      <form onSubmit={register}>
+      <form onSubmit={registerUser}>
         <Input required
           active={isActive}
           autoComplete="off"

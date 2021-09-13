@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import { Link, useHistory } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { LogIn } from "../../services/api";
 import { FormContainer, TrackItLogo, Button, Input } from "../../styles/LoginAndRegisterStyles";
-import { UserContext } from "../../contexts/UserContext";
-
 
 const LoginPage = () => {
 
@@ -14,7 +13,7 @@ const LoginPage = () => {
   const [isActive, setIsActive] = useState(true);
   const [inputFields, setInputFields] = useState("");
 
-  const checkToken = () => {
+  const checkUserOnLocalStorage = () => {
     const userLocalStorage = localStorage.getItem("user");
 
     if (userLocalStorage === null) {
@@ -26,21 +25,22 @@ const LoginPage = () => {
     }
   }
 
-  checkToken();
+  checkUserOnLocalStorage();
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value })
   }
 
-  const enter = (event) => {
+  const loginUser = (event) => {
     event.preventDefault();
     setIsActive(false);
     const body = inputFields;
 
     LogIn(body)
       .then((response) => {
-        setUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
+        const user = response.data
+        setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
         setIsActive(true);
         history.push("/hoje");
       })
@@ -54,7 +54,7 @@ const LoginPage = () => {
     <FormContainer>
       <TrackItLogo alt="logo" />
 
-      <form onSubmit={enter}>
+      <form onSubmit={loginUser}>
         <Input required
           active={isActive}
           type="text"

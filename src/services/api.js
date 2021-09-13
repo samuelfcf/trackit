@@ -12,7 +12,6 @@ const LogIn = async (request) => {
     email: request.email,
     password: request.password
   }
-
   const promise = await axios.post(`${BASE_URL}/auth/login`, body);
   return promise;
 }
@@ -23,7 +22,6 @@ const getHabits = async (token) => {
       Authorization: `Bearer ${token}`
     }
   }
-
   const promise = await axios.get(`${BASE_URL}/habits`, config);
   return promise;
 }
@@ -39,7 +37,6 @@ const createHabit = async (request, token) => {
       Authorization: `Bearer ${token}`
     }
   }
-
   const promise = await axios.post(`${BASE_URL}/habits`, body, config);
   return promise;
 }
@@ -50,7 +47,6 @@ const deleteHabit = async (id, token) => {
       Authorization: `Bearer ${token}`
     }
   }
-
   const promise = await axios.delete(`${BASE_URL}/habits/${id}`, config);
   return promise;
 }
@@ -61,19 +57,18 @@ const getTodayHabits = async (token) => {
       Authorization: `Bearer ${token}`
     }
   }
-
   const promise = await axios.get(`${BASE_URL}/habits/today`, config);
   return promise
 }
 
 const checkHabitDone = async (id, token) => {
+  const body = {}
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
-
-  const promise = await axios.post(`${BASE_URL}/habits/${id}/check`, "", config);
+  const promise = await axios.post(`${BASE_URL}/habits/${id}/check`, body, config);
   return promise;
 }
 
@@ -83,7 +78,6 @@ const uncheckHabit = async (id, token) => {
       Authorization: `Bearer ${token}`
     }
   }
-
   const promise = await axios.post(`${BASE_URL}/habits/${id}/uncheck`, "", config);
   return promise;
 }

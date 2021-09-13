@@ -1,20 +1,20 @@
 
 import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Footer } from "../../components/Footer"
 import { Header } from "../../components/Header"
 import { PageContent } from "../../styles/PageContentStyle";
-import Delete from "../../assets/delete.png";
 import { UserContext } from "../../contexts/UserContext";
-import { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, ActionButtons, HabbitCard, Button, WeekdayBtnStyled } from "./HabitsPageStyles";
 import { createHabit, getHabits, deleteHabit } from "../../services/api";
 import { WeekdayButton } from "./WeekdayButton";
 import { SmallLoading } from "../../components/SmallLoading";
-import { useHistory } from "react-router-dom";
+import { MyHabitsCard, NewHabitButton, MessageCard, NewHabitCard, WeekdaysButtons, ActionButtons, HabbitCard, Button, WeekdayBtnStyled } from "./HabitsPageStyles";
+import Delete from "../../assets/delete.png";
 
 const HabitsPage = () => {
 
-  const history = useHistory();
   const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+  const history = useHistory();
   const { user } = useContext(UserContext);
 
   const [habits, setHabits] = useState([]);
@@ -32,6 +32,7 @@ const HabitsPage = () => {
   useEffect(() => {
     getHabits(user.token)
       .then(response => setHabits(response.data))
+      .catch(error => console.log(error));
   }, []);
 
   const handleChange = (event) => {
@@ -39,7 +40,6 @@ const HabitsPage = () => {
   }
 
   const handleClick = (event, value) => {
-
     if (newHabit.days.includes(value)) {
       newHabit.days.splice(newHabit.days.indexOf(value), 1);
     } else {
@@ -48,44 +48,40 @@ const HabitsPage = () => {
   }
 
   const addNewHabit = () => {
-    setIsActive(false)
+    setIsActive(false);
 
     if (newHabit.days.length === 0) {
       setIsActive(true);
       return alert("selecione no mínimo um dia da semana");
     }
-
-    const body = newHabit
-
+    const body = newHabit;
     createHabit(body, user.token)
       .then(() => {
-        setIsActive(true)
-        getHabits(user.token)
-          .then(response => setHabits(response.data));
-
+        setIsActive(true);
+        getHabits(user.token).then(response => setHabits(response.data));
         setNewHabit({
           name: "",
           days: []
         });
         setShowForm(!showForm);
       })
-      .catch(() => {
-        alert("Erro ao casdastrar hábito! Por favor tente novamente")
-        setIsActive(true)
+      .catch((error) => {
+        console.log(error);
+        setIsActive(true);
+        alert("Erro ao casdastrar hábito! Por favor tente novamente");
       })
   }
 
   const delHabit = (id) => {
-
     if (window.confirm("tem certeza que deseja excluir?")) {
       deleteHabit(id, user.token)
         .then((response) => {
           if (response.data != null) {
             habits.filter((habit) => habit.id !== id);
             getHabits(user.token)
-              .then(response => setHabits(response.data))
+              .then(response => setHabits(response.data));
           }
-        })
+        });
     }
   }
 
@@ -132,18 +128,18 @@ const HabitsPage = () => {
 
         {habits.length === 0
           ?
-          <MessageCard isHidden={false}>
-            Você não tem nenhum hábito cadastrado ainda. Adicine um hábito para começar a trackear!
+          <MessageCard>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
           </MessageCard>
           :
           habits.map((habit) => (
-            <HabbitCard isHidden={false}>
-              <img src={Delete} alt="" onClick={() => delHabit(habit.id)} />
+            <HabbitCard>
+              <img src={Delete} alt="delete-icon" onClick={() => delHabit(habit.id)} />
               <span>{habit.name}</span>
               <WeekdaysButtons>
                 {weekdays.map((weekday, index) => {
-                  let selected = false
-                  habit.days.forEach(day => day === index ? selected = true : selected)
+                  let selected = false;
+                  habit.days.forEach(day => day === index ? selected = true : selected);
                   return <WeekdayBtnStyled selected={selected}>{weekday}</WeekdayBtnStyled>
                 })}
               </WeekdaysButtons>
@@ -157,6 +153,5 @@ const HabitsPage = () => {
     </>
   );
 }
-
 
 export { HabitsPage }

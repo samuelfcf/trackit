@@ -3,10 +3,10 @@ import { HabitsPage } from "./pages/HabitsPage/HabitsPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { TodayPage } from "./pages/TodayPage.js/TodayPage";
+import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 import { GlobalStyle } from "./styles/global";
 import { UserContext } from "./contexts/UserContext";
 import { HabitsContext } from "./contexts/HabitsContext";
-import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 import { useState } from "react";
 
 
@@ -22,8 +22,8 @@ function App() {
           <GlobalStyle />
           <Switch>
             <Route path="/" exact component={LoginPage} />
+            <Route path="/cadastro" exact component={SignUpPage} />
             <HabitsContext.Provider value={{ habitsStatus, setHabitsStatus }}>
-              <Route path="/cadastro" exact component={SignUpPage} />
               <Route path="/habitos" exact component={HabitsPage} />
               <Route path="/hoje" exact component={TodayPage} />
               <Route path="/historico" exact component={HistoryPage} />

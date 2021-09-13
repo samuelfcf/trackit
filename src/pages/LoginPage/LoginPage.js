@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { LogIn } from "../../services/api";
@@ -14,6 +14,20 @@ const LoginPage = () => {
   const [isActive, setIsActive] = useState(true);
   const [inputFields, setInputFields] = useState("");
 
+  const checkToken = () => {
+    const userLocalStorage = localStorage.getItem("user");
+
+    if (userLocalStorage === null) {
+      return
+    } else {
+      const user = JSON.parse(userLocalStorage);
+      setUser(user);
+      history.push("/hoje")
+    }
+  }
+
+  checkToken();
+
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value })
   }
@@ -26,6 +40,7 @@ const LoginPage = () => {
     LogIn(body)
       .then((response) => {
         setUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
         setIsActive(true);
         history.push("/hoje");
       })
@@ -52,7 +67,7 @@ const LoginPage = () => {
           placeholder="senha"
           onChange={handleChange}
           name="password" />
-        <Button active={isActive}>
+        <Button active={isActive} type="submit">
           {
             isActive
               ? "Entrar"

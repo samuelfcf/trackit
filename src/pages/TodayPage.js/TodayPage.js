@@ -6,7 +6,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { HabitsContext } from "../../contexts/HabitsContext";
 import { getTodayHabits, checkHabitDone, uncheckHabit } from "../../services/api";
 import { PageContent } from "../../styles/PageContentStyle";
-import { TodayContainer, HabitInfoCard, HabitContainer, CurrentSequence } from "./TodayPageStyles";
+import { TodayContainer, HabitInfoCard, HabitContainer, SequenceContainer, Sequence, Record } from "./TodayPageStyles";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { CheckButtonnn } from "./CheckButton";
@@ -15,8 +15,8 @@ import { CheckButtonnn } from "./CheckButton";
 const TodayPage = () => {
 
   const today = (dayjs().locale('pt-br').format('dddd, DD/MM'));
-
   const history = useHistory();
+
   const { user } = useContext(UserContext);
   const { habitsStatus, setHabitsStatus } = useContext(HabitsContext);
 
@@ -39,13 +39,12 @@ const TodayPage = () => {
     if (!habit.done) {
       checkHabitDone(habit.id, user.token)
         .then((response) => {
-          console.log("mark", response.data)
-          const progress = parseFloat(habitsStatus)
-          const currentProgress = progress + (100 / todayHabits.length)
-          setHabitsStatus(currentProgress)
+          const progress = habitsStatus
+          const currentProgress = progress + parseFloat((100 / todayHabits.length).toFixed(2))
+          currentProgress > 99 ? setHabitsStatus(100) : setHabitsStatus(currentProgress)
           getTodayHabits(user.token)
             .then((response) => {
-              const habits = response.data;
+              const habits = response.data
               setTodayHabits(habits);
             });
         })
@@ -55,14 +54,13 @@ const TodayPage = () => {
     if (habit.done) {
       uncheckHabit(habit.id, user.token)
         .then((response) => {
-          console.log("desmark", response.data)
-          const progress = parseFloat(habitsStatus)
-          const currentProgress = progress - (100 / todayHabits.length)
-          setHabitsStatus(currentProgress)
+          const progress = habitsStatus
+          const currentProgress = progress - parseFloat((100 / todayHabits.length).toFixed(2))
+          currentProgress < 1 ? setHabitsStatus(0) : setHabitsStatus(currentProgress)
           getTodayHabits(user.token)
             .then((response) => {
-              const habits = response.data;
-              setTodayHabits(habits);
+              const habits = response.data
+              setTodayHabits(habits)
             });
         })
         .catch(err => console.log(err));
@@ -86,10 +84,16 @@ const TodayPage = () => {
             <div>
               <HabitInfoCard>
                 <h2>{habit.name}</h2>
-                <CurrentSequence>
-                  <p>Sequência atual: {habit.currentSequence} dias</p>
-                  <p>Seu recorde: {habit.highestSequence} dias</p>
-                </CurrentSequence>
+                <SequenceContainer>
+                  <p>
+                    Sequência atual:
+                    <Sequence done={habit.done ? true : false}>{habit.currentSequence} {habit.currentSequence === 1 ? "dia" : "dias"}</Sequence>
+                  </p>
+                  <p>
+                    Seu recorde:
+                    <Record done={(habit.highestSequence === habit.currentSequence && habit.highestSequence > 0) ? true : false}>{habit.highestSequence} {habit.highestSequence === 1 ? "dia" : "dias"}</Record>
+                  </p>
+                </SequenceContainer>
               </HabitInfoCard>
             </div>
             <CheckButtonnn

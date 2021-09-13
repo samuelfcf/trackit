@@ -23,9 +23,22 @@ const HabitContainer = styled.div`
   margin-top: 10px;
 `
 
-const CurrentSequence = styled.div`
+const SequenceContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  p {
+    display: flex;
+    gap: 5px;
+  }
+`
+
+const Sequence = styled.p`
+  color: ${({ done }) => done ? "#8FC549" : "666666"}
+`
+
+const Record = styled.p`
+  color: ${({ done }) => done ? "#8FC549" : "666666"}
 `
 
 const HabitInfoCard = styled.div`
@@ -50,4 +63,6 @@ const CheckButtonStyled = styled.button`
   background-color: ${({ done }) => done ? "#8FC549" : "#EBEBEB"}
 `
 
-export { TodayContainer, HabitInfoCard, HabitContainer, CurrentSequence, CheckButtonStyled }
+
+
+export { TodayContainer, HabitInfoCard, HabitContainer, SequenceContainer, Sequence, Record, CheckButtonStyled }

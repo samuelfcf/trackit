@@ -17,7 +17,7 @@ const TodayPage = () => {
   const today = (dayjs().locale('pt-br').format('dddd, DD/MM'));
   const history = useHistory();
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { habitsStatus, setHabitsStatus } = useContext(HabitsContext);
   const [todayHabits, setTodayHabits] = useState([]);
 
@@ -42,6 +42,7 @@ const TodayPage = () => {
         .then(() => {
           const currentProgress = progress + percentageFraction;
           currentProgress > 99 ? setHabitsStatus(100) : setHabitsStatus(currentProgress);
+          setUser({ ...user, currentProgress })
           getTodayHabits(user.token)
             .then((response) => {
               const habits = response.data;
